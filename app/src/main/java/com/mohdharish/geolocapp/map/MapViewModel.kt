@@ -101,7 +101,9 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         if (!Places.isInitialized()) {
-            Places.initialize(appContext, "AIzaSyBjpUgf5w7UMenU6nccd0pOvOFOEILFyac")
+            // Hide API key: Read from local.properties or BuildConfig, not hardcoded
+            val apiKey = BuildConfig.MAPS_API_KEY // Make sure to define this in your build config
+            Places.initialize(appContext, apiKey)
         }
         placesClient = Places.createClient(application)
 
