@@ -38,6 +38,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import com.mohdharish.geolocapp.BuildConfig // Add this import
 
 class MapViewModel(application: Application) : AndroidViewModel(application) {
     companion object {

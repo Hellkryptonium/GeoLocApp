@@ -5,6 +5,18 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose") version "2.0.0"
 }
 
+import java.util.Properties // Ensure this import is present and correctly placed
+
+// Helper function to get properties from local.properties
+fun getLocalProperty(key: String, project: org.gradle.api.Project): String {
+    val properties = Properties() // Use the imported Properties
+    val localPropertiesFile = project.rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use { properties.load(it) }
+    }
+    return properties.getProperty(key, "")
+}
+
 android {
     namespace = "com.mohdharish.geolocapp"
     compileSdk = 35
@@ -17,6 +29,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Make the API key available in BuildConfig
+        buildConfigField("String", "MAPS_API_KEY", "\"${getLocalProperty("MAPS_API_KEY", project)}\"")
     }
 
     buildTypes {
@@ -30,9 +44,11 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true // Ensure BuildConfig is generated for API key access
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"
+        // Removed invalid kotlinCompilerPluginArgs property
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -40,6 +56,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+        freeCompilerArgs += listOf(
+            "-P", "plugin:androidx.compose.compiler.plugins.kotlin:featureFlag=IntrinsicRemember",
+            "-P", "plugin:androidx.compose.compiler.plugins.kotlin:featureFlag=OptimizeNonSkippingGroups",
+            "-P", "plugin:androidx.compose.compiler.plugins.kotlin:featureFlag=StrongSkipping"
+        )
     }
 }
 
