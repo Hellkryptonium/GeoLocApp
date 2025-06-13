@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoLocApp - Nature Inspired Location App</title>
+  <meta name="description" content="GeoLocApp: Pin, share, and set alarms for locations. Download the APK, view the source, and meet the developer!" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 100%);
+      font-family: 'Nunito', 'Inter', 'Poppins', sans-serif;
+      color: #2e7d32;
+    }
+    .nature-hero {
+      background: linear-gradient(120deg, #a5d6a7 60%, #e8f5e9 100%);
+      border-radius: 2rem;
+      box-shadow: 0 8px 32px rgba(46,125,50,0.15);
+    }
+    .feature-icon {
+      width: 48px; height: 48px; margin-bottom: 1rem;
+    }
+    .swiper-slide img {
+      border-radius: 1rem;
+      box-shadow: 0 4px 16px rgba(46,125,50,0.12);
+    }
+    .btn-nature {
+      background: #388e3c;
+      color: #fff;
+      border-radius: 2rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-nature:hover {
+      background: #2e7d32;
+      color: #fff;
+    }
+    .about-avatar {
+      border: 4px solid #a5d6a7;
+      box-shadow: 0 2px 8px rgba(46,125,50,0.10);
+    }
+    .footer-nature {
+      background: #a5d6a7;
+      color: #2e7d32;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-success" href="index.html">GeoLocApp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="screenshots.html">Screenshots</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="container py-5 nature-hero my-5" data-aos="fade-down">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start">
+        <img src="images/app-icon.png" alt="GeoLocApp Icon" class="mb-4" style="width: 90px; height: 90px;">
+        <h1 class="display-4 fw-bold mb-3">GeoLocApp</h1>
+        <p class="lead mb-4">Fall in love with nature and your favorite places. Pin, share, and set location alarms with a green, eco-friendly touch.</p>
+        <a href="https://github.com/Hellkryptonium/GeoLocApp/releases/download/auto-release-20250613-155555/app-release-unsigned.apk" class="btn btn-nature btn-lg me-2 mb-2">Download APK</a>
+        <a href="https://github.com/Hellkryptonium/GeoLocApp" target="_blank" class="btn btn-outline-success btn-lg mb-2">View on GitHub</a>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="images/app-icon.png" alt="GeoLocApp Icon" class="img-fluid" style="max-height: 320px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="container py-5" id="features">
+    <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">Features</h2>
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="text-center p-4 bg-white rounded-4 shadow-sm h-100">
+          <img src="images/pin-green.svg" alt="Pin" class="feature-icon">
+          <h5 class="fw-bold mb-2">Pin Locations</h5>
+          <p>Save your favorite nature spots and never lose them again.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="text-center p-4 bg-white rounded-4 shadow-sm h-100">
+          <img src="images/alarm-green.svg" alt="Alarm" class="feature-icon">
+          <h5 class="fw-bold mb-2">Location Alarms</h5>
+          <p>Set reminders for parks, gardens, or any place you love.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="text-center p-4 bg-white rounded-4 shadow-sm h-100">
+          <img src="images/share-green.svg" alt="Share" class="feature-icon">
+          <h5 class="fw-bold mb-2">Share & Collaborate</h5>
+          <p>Share green adventures with friends and plan eco-trips together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Gallery -->
+  <section class="container py-5" id="screenshots">
+    <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">App Screenshots</h2>
+    <div class="swiper mySwiper" data-aos="fade-up">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="images/screen1.png" alt="Screenshot 1" class="img-fluid rounded-4 shadow mx-auto d-block" style="max-width: 260px;"></div>
+        <div class="swiper-slide"><img src="images/screen2.png" alt="Screenshot 2" class="img-fluid rounded-4 shadow mx-auto d-block" style="max-width: 260px;"></div>
+        <div class="swiper-slide"><img src="images/screen3.png" alt="Screenshot 3" class="img-fluid rounded-4 shadow mx-auto d-block" style="max-width: 260px;"></div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </section>
+
+  <!-- About Developer -->
+  <section class="container py-5" id="about">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-8 text-center">
+        <img src="images/dev-avatar.png" alt="Developer" class="about-avatar rounded-circle mb-4 shadow-lg" style="width: 140px; height: 140px;">
+        <h2 class="fw-bold mb-2 display-5">About the Developer</h2>
+        <p class="mb-4 fs-5">Hi, I’m <span class="fw-semibold">Mohd Harish</span>! I’m passionate about Android, nature, and building apps that help people connect with the world around them. GeoLocApp is my way of sharing that love with you.</p>
+        <div class="mb-4 d-flex flex-wrap justify-content-center gap-3">
+          <a href="mailto:your@email.com" class="btn btn-outline-success rounded-pill px-4"><i class="bi bi-envelope"></i> Email</a>
+          <a href="https://github.com/Hellkryptonium" target="_blank" class="btn btn-outline-dark rounded-pill px-4"><i class="bi bi-github"></i> GitHub</a>
+          <a href="https://www.linkedin.com/in/mohd-harish-126a58256/" class="btn btn-outline-primary rounded-pill px-4"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://www.instagram.com/_harish999/" class="btn btn-outline-danger rounded-pill px-4"><i class="bi bi-instagram"></i> Instagram</a>
+        </div>
+        <div class="bg-light rounded-4 p-4 shadow-sm mt-4">
+          <h4 class="fw-bold mb-2 text-success">Let’s Connect!</h4>
+          <p class="mb-0">Feel free to reach out for collaborations, questions, or just to say hi. I love meeting new people in tech and nature!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-5 text-center" style="background: linear-gradient(90deg, #a5d6a7 60%, #e8f5e9 100%);">
+    <h2 class="fw-bold mb-3">Ready to explore with GeoLocApp?</h2>
+    <a href="https://github.com/Hellkryptonium/GeoLocApp/releases/download/auto-release-20250613-155555/app-release-unsigned.apk" class="btn btn-nature btn-lg">Download Now</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-nature py-4 text-center">
+    <p class="mb-0">© 2025 GeoLocApp. Made with <span style="color:#388e3c;">&#10084;</span> by Mohd Harish. <a href="https://github.com/Hellkryptonium/GeoLocApp" class="fw-bold text-success">GitHub</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    AOS.init();
+    var swiper = new Swiper('.mySwiper', {
+      loop: true,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      slidesPerView: 1,
+      spaceBetween: 30,
+      breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+    });
+  </script>
+</body>
+</html>
