@@ -36,6 +36,19 @@ jobs:
       - name: Build APK
         run: ./gradlew assembleRelease
 
+      - name: Set release tag
+        id: set_tag
+        run: |
+          TAG="auto-release-$(date +'%Y%m%d-%H%M%S')"
+          echo "RELEASE_TAG=$TAG" >> $GITHUB_ENV
+
+      - name: Create and push tag
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git tag $RELEASE_TAG
+          git push origin $RELEASE_TAG
+
       - name: Get APK path
         id: get_apk
         run: echo "APK_PATH=$(find $GITHUB_WORKSPACE/app/build/outputs/apk/release -name '*.apk' | head -n 1)" >> $GITHUB_ENV
@@ -44,7 +57,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}-release-${{ github.run_number }}
+          tag_name: ${{ env.RELEASE_TAG }}
           name: Release ${{ github.run_number }}
           draft: false
           prerelease: false
