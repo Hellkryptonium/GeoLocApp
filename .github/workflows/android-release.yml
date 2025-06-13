@@ -25,6 +25,11 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: Inject Google Maps API Key
+        run: |
+          mkdir -p app/src/release/res/values
+          echo '<resources><string name="google_maps_key">${{ secrets.MAPS_API_KEY }}</string></resources>' > app/src/release/res/values/strings.xml
+
       - name: Build APK
         run: ./gradlew assembleRelease
 
