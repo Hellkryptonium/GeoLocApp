@@ -74,7 +74,8 @@ jobs:
       - name: Get APK path
         id: get_apk
         run: |
-          APK_PATH="$GITHUB_WORKSPACE/app/build/outputs/apk/release/app-release.apk"
+          APK_PATH=$(find $GITHUB_WORKSPACE/app/build/outputs/apk/release/ -name "*.apk" | head -n 1)
+          echo "Found APK at: $APK_PATH"
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
 
       - name: Validate APK exists
