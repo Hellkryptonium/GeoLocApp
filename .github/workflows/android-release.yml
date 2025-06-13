@@ -49,8 +49,8 @@ jobs:
       - name: Build APK
         run: ./gradlew assembleRelease
 
-      - name: List APK output directory
-        run: ls -lh app/build/outputs/apk/release/
+      - name: List all APKs after build
+        run: find app/build/outputs/apk/ -type f -ls
 
       - name: Set release tag
         if: github.ref == 'refs/heads/main'
