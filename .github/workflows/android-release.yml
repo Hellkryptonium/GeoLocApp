@@ -31,10 +31,12 @@ jobs:
       - name: Inject Google Maps API Key
         run: |
           mkdir -p app/src/release/res/values
-          echo '<resources><string name="google_maps_key">${{ secrets.MAPS_API_KEY }}</string></resources>' > app/src/release/res/values/strings.xml
+          echo \'<resources><string name="google_maps_key">${{ secrets.MAPS_API_KEY }}</string></resources>\' > app/src/release/res/values/strings.xml
 
       - name: Build APK
-        run: ./gradlew assembleRelease      - name: Set release tag
+        run: ./gradlew assembleRelease
+        
+      - name: Set release tag
         id: set_tag
         run: |
           TAG="auto-release-$(date +'%Y%m%d-%H%M%S')"
