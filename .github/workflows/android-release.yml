@@ -51,24 +51,15 @@ jobs:
 
       - name: Get APK path
         id: get_apk
-        run: echo "APK_PATH=$(find $GITHUB_WORKSPACE/app/build/outputs/apk/release -name '*.apk' | head -n 1)" >> $GITHUB_ENV
-
-      - name: Create Release
+        run: echo "APK_PATH=$(find $GITHUB_WORKSPACE/app/build/outputs/apk/release -name '*.apk' | head -n 1)" >> $GITHUB_ENV      - name: Create Release and Upload APK
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.RELEASE_TAG }}
           name: Release ${{ github.run_number }}
+          files: ${{ env.APK_PATH }}
           draft: false
           prerelease: false
           generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload APK to Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          files: ${{ env.APK_PATH }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
