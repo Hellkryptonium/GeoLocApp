@@ -24,6 +24,19 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          api-level: 33
+          components: |
+            build-tools;33.0.2
+            platform-tools
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/gradle-wrapper.properties') }}
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
@@ -31,29 +44,39 @@ jobs:
       - name: Inject Google Maps API Key
         run: |
           mkdir -p app/src/release/res/values
-          echo \'<resources><string name="google_maps_key">${{ secrets.MAPS_API_KEY }}</string></resources>\' > app/src/release/res/values/strings.xml
+          echo '<resources><string name="google_maps_key">${{ secrets.MAPS_API_KEY }}</string></resources>' > app/src/release/res/values/strings.xml
 
       - name: Build APK
         run: ./gradlew assembleRelease
-        
+
       - name: Set release tag
+        if: github.ref == 'refs/heads/main'
         id: set_tag
         run: |
           TAG="auto-release-$(date +'%Y%m%d-%H%M%S')"
           echo "RELEASE_TAG=$TAG" >> $GITHUB_ENV
 
       - name: Create and push tag
+        if: github.ref == 'refs/heads/main'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git tag $RELEASE_TAG
-          git push origin $RELEASE_TAG
+          if git rev-parse "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Tag exists, skipping"
+          else
+            git tag $RELEASE_TAG
+            git push origin $RELEASE_TAG
+          fi
 
       - name: Get APK path
         id: get_apk
-        run: echo "APK_PATH=$(find $GITHUB_WORKSPACE/app/build/outputs/apk/release -name '*.apk' | head -n 1)" >> $GITHUB_ENV
-        
+        run: echo "APK_PATH=$(find $GITHUB_WORKSPACE/app/build/outputs/apk/release -name '*release.apk' -print -quit)" >> $GITHUB_ENV
+
+      - name: Validate APK exists
+        run: test -f "${{ env.APK_PATH }}" || (echo "APK not found!" && exit 1)
+
       - name: Create Release and Upload APK
+        if: github.ref == 'refs/heads/main'
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
