@@ -438,4 +438,8 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
     fun setCameraMoveRequest(latLng: LatLng) {
         _cameraMoveRequest.value = latLng
     }
+
+    fun clearCheckCurrentLocationStatus() {
+        _checkCurrentLocationStatus.value = null
+    }
 }

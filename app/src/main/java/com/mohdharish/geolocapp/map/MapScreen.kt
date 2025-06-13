@@ -68,7 +68,8 @@ fun MapScreen(
     isInsideGeofence: Boolean?, // NEW: null = not checked, true/false = result
     checkCurrentLocationStatus: String?, // NEW: status message
     onRequestBackgroundLocationPermission: (android.app.Activity) -> Unit, // NEW
-    pinnedAlarms: List<AlarmItem> // NEW: list of pinned alarms
+    pinnedAlarms: List<AlarmItem>, // NEW: list of pinned alarms
+    onClearStatus: (() -> Unit)? = null // Optional lambda to clear status
 ) {
     val cameraPositionState = rememberCameraPositionState()
     val coroutineScope = rememberCoroutineScope()
@@ -365,6 +366,14 @@ fun MapScreen(
                     color = if (isInsideGeofence == true) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onErrorContainer,
                     style = MaterialTheme.typography.titleSmall
                 )
+            }
+            // Auto-dismiss logic for pin notification
+            if (status == "Pinned your current location.") {
+                LaunchedEffect(status) {
+                    kotlinx.coroutines.delay(2000)
+                    // Clear the status after 2 seconds
+                    onClearStatus?.invoke()
+                }
             }
         }
 

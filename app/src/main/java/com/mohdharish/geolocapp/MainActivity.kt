@@ -94,7 +94,8 @@ class MainActivity : ComponentActivity() {
                                 isInsideGeofence = isInsideGeofence,
                                 checkCurrentLocationStatus = checkCurrentLocationStatus,
                                 onRequestBackgroundLocationPermission = { activity -> mapViewModel.requestBackgroundLocationPermission(activity) },
-                                pinnedAlarms = alarms
+                                pinnedAlarms = alarms,
+                                onClearStatus = { mapViewModel.clearCheckCurrentLocationStatus() }
                             )
                         },
                         alarmScreenContent = {
