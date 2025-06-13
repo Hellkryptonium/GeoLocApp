@@ -46,8 +46,8 @@ jobs:
           mkdir -p app/src/release/res/values
           echo '<resources><string name="google_maps_key">${{ secrets.MAPS_API_KEY }}</string></resources>' > app/src/release/res/values/strings.xml
 
-      - name: Build APK
-        run: ./gradlew assembleRelease
+      - name: Build APK with debug logs
+        run: ./gradlew assembleRelease --stacktrace --debug
 
       - name: List all APKs after build
         run: find app/build/outputs/apk/ -type f -ls
@@ -78,7 +78,11 @@ jobs:
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
 
       - name: Validate APK exists
-        run: test -f "${{ env.APK_PATH }}" || (echo "APK not found!" && exit 1)
+        run: |
+          if [ ! -f "${{ env.APK_PATH }}" ]; then
+            echo "APK not found at ${{ env.APK_PATH }}. Ensure the build process generated it."
+            exit 1
+          fi
 
       - name: Create Release and Upload APK
         if: github.ref == 'refs/heads/main'
