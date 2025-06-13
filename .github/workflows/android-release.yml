@@ -47,7 +47,7 @@ jobs:
           echo '<resources><string name="google_maps_key">${{ secrets.MAPS_API_KEY }}</string></resources>' > app/src/release/res/values/strings.xml
 
       - name: Build APK with debug logs
-        run: ./gradlew assembleRelease --stacktrace --debug
+        run: ./gradlew assembleRelease 
 
       - name: List all APKs after build
         run: find app/build/outputs/apk/ -type f -ls
