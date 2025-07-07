@@ -19,12 +19,12 @@ fun getLocalProperty(key: String, project: org.gradle.api.Project): String {
 
 android {
     namespace = "com.mohdharish.geolocapp"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.mohdharish.geolocapp"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
