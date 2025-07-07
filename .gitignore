@@ -14,6 +14,6 @@
 .cxx
 local.properties
 *.jks
-
+*.b64
 # API keys
 api_keys.xml
