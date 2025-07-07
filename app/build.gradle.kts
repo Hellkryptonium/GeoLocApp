@@ -40,6 +40,15 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+    signingConfigs {
+        create("release") {
+            storeFile = file(System.getenv("SIGNING_KEY_STORE_PATH") ?: "signingkey.jks")
+            storePassword = System.getenv("SIGNING_KEY_STORE_PASSWORD")
+            keyAlias = System.getenv("SIGNING_KEY_ALIAS")
+            keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
         }
     }
     buildFeatures {
