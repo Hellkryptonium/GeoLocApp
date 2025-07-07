@@ -33,6 +33,19 @@ android {
         buildConfigField("String", "MAPS_API_KEY", "\"${getLocalProperty("MAPS_API_KEY", project)}\"")
     }
 
+    signingConfigs {
+        create("release") {
+            // Use the environment variable set in the CI workflow
+            val storeFileFromEnv = System.getenv("SIGNING_STORE_FILE")
+            if (storeFileFromEnv != null) {
+                storeFile = file(storeFileFromEnv)
+            }
+            storePassword = System.getenv("SIGNING_KEY_STORE_PASSWORD")
+            keyAlias = System.getenv("SIGNING_KEY_ALIAS")
+            keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -41,14 +54,6 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
-        }
-    }
-    signingConfigs {
-        create("release") {
-            storeFile = file(System.getenv("SIGNING_KEY_STORE_PATH") ?: "signingkey.jks")
-            storePassword = System.getenv("SIGNING_KEY_STORE_PASSWORD")
-            keyAlias = System.getenv("SIGNING_KEY_ALIAS")
-            keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
         }
     }
     buildFeatures {
